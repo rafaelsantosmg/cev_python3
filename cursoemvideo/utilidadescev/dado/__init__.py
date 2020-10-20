@@ -41,6 +41,11 @@ def leia_real(msg):
 
 
 def leia_nome(msg):
+    """
+    -> Função para ler nomes.
+    :param msg: recebe um texto para validar o nome:
+    :return: o nome validado.
+    """
     while True:
         try:
             nome = str(input(msg)).strip().title()
