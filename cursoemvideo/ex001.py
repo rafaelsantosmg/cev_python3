@@ -1,3 +1,4 @@
-from utilidadescev.string import cabecalho
+from utilidadescev.janelas import *
 
-cabecalho(' Olá Mundo ', 40, "amarelo", '-', '=')
+
+JanelaPython('ex001', 'Olá Mundo')

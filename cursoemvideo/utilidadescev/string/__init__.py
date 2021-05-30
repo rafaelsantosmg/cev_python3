@@ -1,3 +1,6 @@
+from cursoemvideo.utilidadescev.dado import leia_inteiro
+
+
 def cores(valor):
     """
     -> Coloca cor nas linhas e cabeçalhos.
@@ -26,14 +29,14 @@ def linha(tam=50, cor="limpa", lin='-'):
     return print(f'{cores(cor)}{lin * tam}')
 
 
-def cabecalho(msg, tam=50, cor="limpa", lin='-', formatação=' '):
+def cabecalho(msg, tam=50, cor="limpa", lin='-', formatacao=' '):
     """
     -> Função Cabeçalho personalizado.
     :param msg: recebe uma mensagem e centraliza.
     :param tam: define o tamanho da linha.
     :param cor: define a cor de exibição do cabeçalho e das linhas presentes na função.
     :param lin: define o tipo de linha a ser exibido separando a mensagem, ex:('-', '='...).
-    :param formatação: define uma formatação entre a mensagem, ex:('*' **** mgs ****).
+    :param formatacao: define uma formatação entre a mensagem, ex:('*' **** mgs ****).
     :return: a mensagem como cabeçalho formatado.
     """
     while True:
@@ -49,6 +52,21 @@ def cabecalho(msg, tam=50, cor="limpa", lin='-', formatação=' '):
             break
         else:
             linha(tam, cor, lin)
-            print(f'{cores(cor)}{msg.center(tam, formatação)}{cores("limpa")}')
+            print(f'{cores(cor)}{msg.center(tam, formatacao)}{cores("limpa")}')
             linha(tam, cor, lin)
         break
+
+
+def menu(lista, msg='MENU PRINCIPAL'):
+    """
+    -> Cria um menu com multiplas escolhas.
+    :param msg: recebe o título do menu.
+    :param lista: recebe uma lista com as informações do menu.
+    :return: o valor lido pelo usuário.
+    """
+    cabecalho(msg)
+    for k, item in enumerate(lista):
+        print(f'{k+1} - \033[34m{item}\033[m')
+    linha()
+    opc = leia_inteiro('\033[33mSua Opção: \033[m')
+    return opc

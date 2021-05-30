@@ -1,3 +1,6 @@
+from math import sqrt
+
+
 def dobro(num):
     return num * 2
 
@@ -7,7 +10,7 @@ def triplo(num):
 
 
 def raiz_quadrada(num):
-    return num ** (1/2)
+    return sqrt(num)
 
 
 def media(*num):

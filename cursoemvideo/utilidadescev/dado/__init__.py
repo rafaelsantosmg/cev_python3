@@ -1,6 +1,3 @@
-from utilidadescev.string import cabecalho, linha
-
-
 def leia_dinheiro(msg):
     valido = False
     while not valido:
@@ -29,7 +26,8 @@ def leia_inteiro(msg):
 def leia_real(msg):
     while True:
         try:
-            num = float(input(msg))
+            entrada = str(input(msg)).strip().replace(',', '.')
+            num = float(entrada)
         except (ValueError, TypeError):
             print('\033[31mERRO! Digite apenas números inteiros ou reais.\033[m')
             continue
@@ -43,28 +41,38 @@ def leia_real(msg):
 def leia_nome(msg):
     while True:
         try:
-            nome = str(input(msg)).strip().title()
+            nome = list()
+            entrada = str(input('Digite seu Nome: ')).strip().title()
+            if entrada == '':
+                continue
+        except ValueError:
+            continue
         except KeyboardInterrupt:
             print('\n\033[31mFinalizado pelo usuário!\033[m')
-            break
+            return None
         else:
-            if len(nome) < 3:
-                print('\033[31mDado incorreto!\033[m Informe um Nome válido!')
-                nome = ''
-                continue
-            return nome
-
-
-def menu(lista, msg='MENU PRINCIPAL'):
-    """
-    -> Cria um menu com multiplas escolhas.
-    :param msg: recebe o título do menu.
-    :param lista: recebe uma lista com as informações do menu.
-    :return: o valor lido pelo usuário.
-    """
-    cabeçalho(msg)
-    for k, item in enumerate(lista):
-        print(f'{k+1} - \033[34m{item}\033[m')
-    linha()
-    opc = leia_inteiro('\033[33mSua Opção: \033[m')
-    return opc
+            temp = entrada.split()
+            c = 1
+            n = 0
+            nome_completo = ''
+            for v in temp:
+                if v.isalpha():
+                    if c == 1:
+                        if len(v) <= 3:
+                            print('\033[31mERRO! Nome Inválido! Digite um Nome com mais de 3 letras!\033[m')
+                            c = 1
+                            nome = list()
+                            n = 1
+                            continue
+                        c += 1
+                    nome.append(v)
+                else:
+                    print('\033[31mERRO! Nome não pode conter números!\033[m')
+                    nome = list()
+                    n = 1
+                    continue
+            for v in nome:
+                nome_completo += v + ' '
+                n += 1
+            if n == len(nome):
+                return nome_completo
